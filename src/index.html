@@ -13,14 +13,27 @@
     <h1>Vanilla JavaScript App</h1>
     <h1>This app is created by Anoop Behal!!!!</h1>
     <h1>This is fun, working on Static Apps!!!!</h1>
+    <input id="textToShow" type="text" placeholder="textToShow" title="textTitle" value="Anoop Behal"/>
+    <button id="clickMe" onclick="handleButtonClick()">Click Me To Change Text</button>
     <p>Loading content from the API: <b id="name">...</b></p>
   </main>
 
   <script>
     (async function() {
-        const { text } = await( await fetch(`/api/AddMessage?name=Anoop Behal`)).json();
+        const textToShow = document.getElementById('textToShow').value;        
+        const urlToFetch = `/api/AddMessage?name=` + textToShow;
+        const { text } = await( await fetch(urlToFetch)).json();
         document.querySelector('#name').textContent = text;
     }());
+
+    async function handleButtonClick()
+    {
+      const textToShow = document.getElementById('textToShow').value;
+      const urlToFetch = `/api/AddMessage?name=` + textToShow;
+      const { text } = await( await fetch(urlToFetch)).json();
+        document.querySelector('#name').textContent = text;
+      console.log("Button Clicked " + textToShow);
+    }
     </script>
 </body>
 
